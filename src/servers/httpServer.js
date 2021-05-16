@@ -58,13 +58,13 @@ class HttpServer {
                 name = url.replace('/','')
                 break;
         }
-
+        
         if ( showPage ) {
-            this.showFile( res, name )
+            this.sendFile( res, name )
         }
     }
 
-    showFile( res, name ) {
+    sendFile( res, name ) {
          
         fs.readFile( name, ( err, data ) => {
             const extension = name.split('.')[1]

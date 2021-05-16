@@ -79,7 +79,6 @@
                     type="checkbox" 
                     value="on"
                     id="form-persiana"
-                    onchange="togglePersiana()"
                 />
                 <label class="form-check-label ml-3">
                     Persianas
@@ -89,8 +88,7 @@
                 <input 
                     class="form-check-input" 
                     type="checkbox" 
-                    id="form-ac" 
-                    onchange="toggleAC()"
+                    id="form-ac"
                 />
                 <label class="form-check-label ml-3">
                     Aire acondicionado
@@ -132,91 +130,8 @@
         </p>
     </footer>
 </body>
-<!-- Helpers -->
-<script>
-    const baseURL      = window.location.origin
-    const sendPost = ( uri, body ) => {
-        const url     = `${baseURL}/${uri}`
-        const headers = new Headers()
-        headers.append("Content-Type", "application/json")
-
-        const requestOptions = {
-            method: 'POST',
-            headers,
-            body
-        }
-
-        fetch( url, requestOptions )
-            .then  ( response => response.text() )
-            .then  ( result   => {
-                Swal.fire({
-                    title: 'Éxito',
-                    text: result,
-                    icon: 'success'
-                })
-            })
-            .catch ( error    => {
-                Swal.fire({
-                    title: 'Error',
-                    text: error,
-                    icon: 'error'
-                })
-            })
-    }
-</script>
 <!-- Formulario sensores -->
-<script>
-    const form         = document.getElementById('form')
-    const pLuminosity  = document.getElementById('luminosidad')
-    const pTemperature = document.getElementById('temperatura')
-    const inputTemperature = document.getElementById('form-temperatura')
-    const inputLuminosity  = document.getElementById('form-luminosidad')
-
-    // Luminosidad
-    pLuminosity.innerHTML = `${inputLuminosity.value}`
-    inputLuminosity.oninput = () => {
-        pLuminosity.innerHTML = `${inputLuminosity.value}`
-    }
-
-    // Temperatura
-    pTemperature.innerHTML = `${inputTemperature.value}º`
-    inputTemperature.oninput = () => {
-        pTemperature.innerHTML = `${inputTemperature.value}º`
-    }
-
-    form.onsubmit = ( e ) => {
-        e.preventDefault()
-
-        const body = JSON.stringify({
-            luminosity  : inputLuminosity.value,
-            temperature : inputTemperature.value
-        })
-        const uri  = 'action/submit-medidas'
-
-        sendPost( uri, body )
-    }
-</script>
-<!-- Actuadores -->
-<script>
-    const formPersiana = document.getElementById('form-persiana')
-    const formAC       = document.getElementById('form-ac')
-
-    const togglePersiana = () => {
-        const body = JSON.stringify({
-            value: formPersiana.checked
-        })
-        const uri  = 'action/persiana'  
-
-        sendPost( uri, body )
-    }
-    
-    const toggleAC = (e) => {
-        const body = JSON.stringify({
-            value: formAC.checked
-        })
-        const uri  = 'action/ac'
-
-        sendPost( uri, body )
-    }
-</script>
+<script type="module" src="/public/js/actuadores/sensors.js"></script>
+<!-- Controladores -->
+<script type="module" src="/public/js/actuadores/controllers.js"></script>
 </html>

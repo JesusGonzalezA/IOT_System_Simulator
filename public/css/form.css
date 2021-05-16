@@ -5,3 +5,26 @@ label {
 form > p {
     display: inline;
 }
+
+.inline {
+    display: inline;
+}
+
+.pl-0 {
+    padding-left: 0!important;
+}
+.ml-0 {
+    margin-left: 0!important;
+}
+
+.ml-0 > .form-check, .ml-0 > .form-check-input {
+    margin-left: 0;
+}
+
+.ml-0 > .form-switch, .ml-0 > .form-check-input {
+    margin-left: 0;
+}
+
+.ml-3 {
+    padding-left: 10px;
+}

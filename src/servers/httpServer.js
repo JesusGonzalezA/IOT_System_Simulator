@@ -1,6 +1,9 @@
 const http   = require("http")
 const fs     = require("fs")
-const getMime = require("../helpers/mimeTypes")
+
+const togglePersiana = require("../scripts/actuadores/persiana")
+const toggleAC       = require("../scripts/actuadores/ac")
+const getMime        = require("../helpers/mimeTypes")
 //**************************************************************************
 
 class HttpServer {
@@ -12,34 +15,67 @@ class HttpServer {
 
     createServer () {
         return http.createServer( (req, res) => {
-            const file = this.route( req.url ) 
-            this.showFile( res, file )
+            req.setEncoding('utf-8')
+            this.route( req, res, req.url )
         })
     }
 
-    route ( url ) {
-        let name = ''
-
+    route ( req, res, url ) {
+        const publicDir  = 'public'
+        const pagesDir   = `${publicDir}/pages`   
+        let name         = ''
+        let showPage     = true
+        
         switch( url ) {
             case '/':
             case '/resumen':
-                name = 'public/pages/index.html'
+                name = `${pagesDir}/index.html`
                 break;
             case '/actuadores':
-                name = 'public/pages/actuadores.html'
+                name = `${pagesDir}/actuadores.html`
                 break;
             case '/historico':
-                name = 'public/pages/historico.html'
+                name = `${pagesDir}/historico.html`
                 break;
             case '/404':
-                name = 'public/pages/404.html'
+                name = `${pagesDir}/404.html`
+                break;
+            case '/action/persiana':
+                showPage = false
+                
+                req.on('data', data => req.body = JSON.parse( data ) )
+                req.on('end', () => {
+                    const message = togglePersiana( req.body.value ) 
+                                        
+                    res.writeHead( 200, {
+                        "Content-Type": "text/plain"
+                    })
+                    res.write( message )
+                    res.end()
+                })
+                break;
+            case '/action/ac':
+                showPage = false
+                
+                req.on('data', data => req.body = JSON.parse( data ) )
+                req.on('end', () => {
+                    const message =  toggleAC( req.body.value ) 
+
+                    res.writeHead( 200, {
+                        "Content-Type": "text/plain"
+                    })
+                    res.write( message )
+                    res.end()
+                })
                 break;
             default: 
                 name = url.replace('/','')
                 break;
         }
 
-        return name
+        if ( showPage ) {
+            this.showFile( res, name )
+        }
     }
 
     showFile( res, name ) {
@@ -54,8 +90,6 @@ class HttpServer {
                 data: ""
             }
 
-            
-            
             if ( !err ) {
                 content.code = 200
                 content.type = mimeType
@@ -70,7 +104,6 @@ class HttpServer {
                     'Location': '/404'
                 })
             }
-            
             res.end()
         })
     }

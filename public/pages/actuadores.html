@@ -24,6 +24,8 @@
         crossorigin="anonymous"
         defer
     ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
+
     <title>IOT Simulation System</title>
 </head>
 <body>
@@ -66,31 +68,43 @@
         <h1>Actuadores</h1>
         <hr/>
 
-        <form>
-
-            <!-- Actuadores -->
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="form-persiana"/>
-                <label class="form-check-label">
+        
+        <!-- Actuadores -->
+        <div class="mt-5 row ml-0">
+            <div class="form-check form-switch inline ml-0 pl-0 col-auto me-auto">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="on"
+                    id="form-persiana"
+                    onchange="togglePersiana()"
+                />
+                <label class="form-check-label ml-3">
                     Persianas
                 </label>
             </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="form-ac" />
-                <label class="form-check-label">
+            <div class="form-check form-switch ml-0 pl-0 col-auto">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="form-ac" 
+                    onchange="toggleAC()"
+                />
+                <label class="form-check-label ml-3">
                     Aire acondicionado
                 </label>
             </div>
-        
-            <!-- Valores -->
+        </div>
+            
+        <!-- Valores -->
+        <form class="mt-5 mb-5">
             <label for="form-temperatura" class="form-label">Temperatura: </label>
             <p id="temperatura"></p>
             <input type="range" class="form-range" id="form-temperatura">
             
             <label for="form-luminosidad" class="form-label">Luminosidad: </label>
             <p id="luminosidad"></p>
-            <input type="range" class="form-range" id="form-luminosidad">
-
+            <input type="range" class="form-range" id="form-luminosidad">   
         </form>
         
     </main>
@@ -108,6 +122,7 @@
         </p>
     </footer>
 </body>
+<!-- Formulario sensores -->
 <script>
     const pLuminosity  = document.getElementById('luminosidad')
     const pTemperature = document.getElementById('temperatura')
@@ -124,6 +139,76 @@
     pTemperature.innerHTML = `${inputTemperature.value}º`
     inputTemperature.oninput = () => {
         pTemperature.innerHTML = `${inputTemperature.value}º`
+    }
+</script>
+<!-- Actuadores -->
+<script>
+    const formPersiana = document.getElementById('form-persiana')
+    const formAC       = document.getElementById('form-ac')
+    const baseURL      = window.location.origin
+
+    const togglePersiana = () => {
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json")
+
+        const data  = JSON.stringify({
+            value: formPersiana.checked
+        })
+
+        const requestOptions = {
+            method: 'POST',
+            headers: headers,
+            body: data
+        }
+
+        fetch( `${baseURL}/action/persiana`, requestOptions )
+            .then  ( response => response.text() )
+            .then  ( result   => {
+                Swal.fire({
+                    title: 'Éxito',
+                    text: result,
+                    icon: 'success'
+                })
+            })
+            .catch ( error    => {
+                Swal.fire({
+                    title: 'Error',
+                    text: error,
+                    icon: 'error'
+                })
+            })
+    }
+    
+    const toggleAC = (e) => {
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json")
+
+        const data  = JSON.stringify({
+            value: formAC.checked
+        })
+
+        const requestOptions = {
+            method: 'POST',
+            headers: headers,
+            body: data
+        }
+
+        fetch( `${baseURL}/action/ac`, requestOptions )
+            .then  ( response => response.text() )
+            .then  ( result   => {
+                Swal.fire({
+                    title: 'Éxito',
+                    text: result,
+                    icon: 'success'
+                })
+            })
+            .catch ( error    => {
+                Swal.fire({
+                    title: 'Error',
+                    text: error,
+                    icon: 'error'
+                })
+            })
     }
 </script>
 </html>

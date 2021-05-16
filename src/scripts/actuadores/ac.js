@@ -1,9 +1,6 @@
 
-const toggleAC = ( value ) => {
-    let message = ( value ) ? 'Activado' : 'Desactivado'
-    message += ' correctamente'
-
-    return message
+const toggleAC = ( { value } ) => {
+    return  ( ( value ? 'Activado' : 'Desactivado' ) + ' correctamente' )
 }
 
 //**************************************************************************

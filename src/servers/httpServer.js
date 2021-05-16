@@ -4,6 +4,8 @@ const fs     = require("fs")
 const togglePersiana = require("../scripts/actuadores/persiana")
 const toggleAC       = require("../scripts/actuadores/ac")
 const getMime        = require("../helpers/mimeTypes")
+const action = require("../helpers/action")
+const submitMedidas = require("../scripts/sensores/form")
 //**************************************************************************
 
 class HttpServer {
@@ -42,31 +44,15 @@ class HttpServer {
                 break;
             case '/action/persiana':
                 showPage = false
-                
-                req.on('data', data => req.body = JSON.parse( data ) )
-                req.on('end', () => {
-                    const message = togglePersiana( req.body.value ) 
-                                        
-                    res.writeHead( 200, {
-                        "Content-Type": "text/plain"
-                    })
-                    res.write( message )
-                    res.end()
-                })
+                action( req, res, togglePersiana )
                 break;
             case '/action/ac':
                 showPage = false
-                
-                req.on('data', data => req.body = JSON.parse( data ) )
-                req.on('end', () => {
-                    const message =  toggleAC( req.body.value ) 
-
-                    res.writeHead( 200, {
-                        "Content-Type": "text/plain"
-                    })
-                    res.write( message )
-                    res.end()
-                })
+                action( req, res, toggleAC )
+                break;
+            case '/action/submit-medidas':
+                showPage = false 
+                action( req, res, submitMedidas)
                 break;
             default: 
                 name = url.replace('/','')

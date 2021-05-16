@@ -1,9 +1,6 @@
 
-const togglePersiana = ( value ) => {
-    let message = ( value ) ? 'Subidas' : 'Bajadas'
-    message += ' correctamente'
-
-    return message
+const togglePersiana = ( { value } ) => {    
+    return  ( ( value ? 'Subidas' : 'Bajadas' ) + ' correctamente' )
 }
 
 //**************************************************************************

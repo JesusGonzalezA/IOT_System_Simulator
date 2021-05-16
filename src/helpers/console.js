@@ -1,4 +1,6 @@
-const colors = require("colors")
+require("colors")
+
+//**************************************************************************
 
 class ConsoleHelper {
 
@@ -16,5 +18,7 @@ class ConsoleHelper {
     }
     
 }
+
+//**************************************************************************
 
 module.exports = ConsoleHelper

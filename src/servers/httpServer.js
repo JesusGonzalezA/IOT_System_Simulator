@@ -1,7 +1,7 @@
 const http   = require("http")
 const fs     = require("fs")
-const url    = require("url")
 const getMime = require("../helpers/mimeTypes")
+//**************************************************************************
 
 class HttpServer {
 
@@ -84,5 +84,7 @@ class HttpServer {
         }
     }
 }
+
+//**************************************************************************
 
 module.exports = HttpServer

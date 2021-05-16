@@ -12,4 +12,6 @@ const getMime = ( extension ) => {
     return mimeTypes[extension]
 }
 
+//**************************************************************************
+
 module.exports = getMime

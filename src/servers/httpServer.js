@@ -12,8 +12,8 @@ class HttpServer {
 
     createServer () {
         return http.createServer( (req, res) => {
-            const file = this.route( req.url )
-            this.showFile( res, file )           
+            const file = this.route( req.url ) 
+            this.showFile( res, file )
         })
     }
 
@@ -23,23 +23,23 @@ class HttpServer {
         switch( url ) {
             case '/':
             case '/resumen':
-                name = 'pages/index.html'
+                name = 'public/pages/index.html'
                 break;
             case '/actuadores':
-                name = 'pages/actuadores.html'
+                name = 'public/pages/actuadores.html'
                 break;
             case '/historico':
-                name = 'pages/historico.html'
+                name = 'public/pages/historico.html'
                 break;
             case '/404':
-                name = 'pages/404.html'
+                name = 'public/pages/404.html'
                 break;
-            default:
-                name = `assets/${url}` 
+            default: 
+                name = url.replace('/','')
                 break;
         }
 
-        return `public/${name}`
+        return name
     }
 
     showFile( res, name ) {
@@ -53,14 +53,16 @@ class HttpServer {
                 type: "",
                 data: ""
             }
+
+            
             
             if ( !err ) {
                 content.code = 200
                 content.type = mimeType
                 content.data = data
-
+                
                 res.writeHead( content.code, {
-                    "Content-Type": "text/html"
+                    "Content-Type": mimeType
                 })
                 res.write( content.data )
             } else {

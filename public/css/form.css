@@ -1,0 +1,7 @@
+label {
+    display: inline;
+}
+
+form > p {
+    display: inline;
+}

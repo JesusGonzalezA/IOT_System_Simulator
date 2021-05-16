@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico">
     <link 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
@@ -16,6 +17,7 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous" 
     />
+    <link rel="stylesheet" href="public/css/form.css" />
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
@@ -63,6 +65,34 @@
     <main class="container">
         <h1>Actuadores</h1>
         <hr/>
+
+        <form>
+
+            <!-- Actuadores -->
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="form-persiana"/>
+                <label class="form-check-label">
+                    Persianas
+                </label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="form-ac" />
+                <label class="form-check-label">
+                    Aire acondicionado
+                </label>
+            </div>
+        
+            <!-- Valores -->
+            <label for="form-temperatura" class="form-label">Temperatura: </label>
+            <p id="temperatura"></p>
+            <input type="range" class="form-range" id="form-temperatura">
+            
+            <label for="form-luminosidad" class="form-label">Luminosidad: </label>
+            <p id="luminosidad"></p>
+            <input type="range" class="form-range" id="form-luminosidad">
+
+        </form>
+        
     </main>
 
     <footer>
@@ -78,4 +108,22 @@
         </p>
     </footer>
 </body>
+<script>
+    const pLuminosity  = document.getElementById('luminosidad')
+    const pTemperature = document.getElementById('temperatura')
+    const inputTemperature = document.getElementById('form-temperatura')
+    const inputLuminosity  = document.getElementById('form-luminosidad')
+
+    // Luminosidad
+    pLuminosity.innerHTML = `${inputLuminosity.value}`
+    inputLuminosity.oninput = () => {
+        pLuminosity.innerHTML = `${inputLuminosity.value}`
+    }
+
+    // Temperatura
+    pTemperature.innerHTML = `${inputTemperature.value}º`
+    inputTemperature.oninput = () => {
+        pTemperature.innerHTML = `${inputTemperature.value}º`
+    }
+</script>
 </html>

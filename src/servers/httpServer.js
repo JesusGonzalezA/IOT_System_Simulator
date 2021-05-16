@@ -4,8 +4,9 @@ const fs     = require("fs")
 const togglePersiana = require("../scripts/actuadores/persiana")
 const toggleAC       = require("../scripts/actuadores/ac")
 const getMime        = require("../helpers/mimeTypes")
-const action = require("../helpers/action")
-const submitMedidas = require("../scripts/sensores/form")
+const action         = require("../helpers/action")
+const submitMedidas  = require("../scripts/sensores/form")
+
 //**************************************************************************
 
 class HttpServer {

@@ -10,7 +10,9 @@ const fillTableActuador = ( values, template, tbody ) => {
     values.forEach( entry => {
         const node = template.cloneNode( true )
         const columns = Array.from( node.children[0].children )
-        columns[0].innerText = entry.date
+
+        const date = new Date( entry.date )
+        columns[0].innerText = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
         columns[1].innerText = ( entry.state )? 'On' : 'Off'
         tbody.appendChild( node )
     })
@@ -28,7 +30,9 @@ const fillTableSensores = ( values ) => {
     values.forEach( entry => {
         const node = templateSensor.cloneNode( true )
         const columns = Array.from( node.children[0].children )
-        columns[0].innerText = entry.date
+        
+        const date = new Date( entry.date )
+        columns[0].innerText = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
         columns[1].innerText = 'Luminosidad \n Temperatura'
         columns[2].innerText = `${ entry.luminosity } \n ${ entry.temperature }º`
         tBodySensores.appendChild( node )   

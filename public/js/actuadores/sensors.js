@@ -6,17 +6,21 @@ const pTemperature = document.getElementById('temperatura')
 const inputTemperature = document.getElementById('form-temperatura')
 const inputLuminosity  = document.getElementById('form-luminosidad')
 
+//**************************************************************************
+// Update value on change
+
 // Luminosidad
-pLuminosity.innerHTML = `${inputLuminosity.value}`
 inputLuminosity.oninput = () => {
     pLuminosity.innerHTML = `${inputLuminosity.value}`
 }
 
 // Temperatura
-pTemperature.innerHTML = `${inputTemperature.value}º`
 inputTemperature.oninput = () => {
     pTemperature.innerHTML = `${inputTemperature.value}º`
 }
+
+//**************************************************************************
+// SUBMIT
 
 form.onsubmit = ( e ) => {
     e.preventDefault()

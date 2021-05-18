@@ -104,11 +104,11 @@
         <form class="mt-3 mb-5 container" id="form">
             <label for="form-temperatura" class="form-label">Temperatura: </label>
             <p id="temperatura"></p>
-            <input type="range" class="form-range" id="form-temperatura">
+            <input type="range" class="form-range" min="-10" max="50" id="form-temperatura">
             
             <label for="form-luminosidad" class="form-label">Luminosidad: </label>
             <p id="luminosidad"></p>
-            <input type="range" class="form-range" id="form-luminosidad">   
+            <input type="range" class="form-range" min="0" max="100" id="form-luminosidad">   
 
             <input 
                 type="submit"
@@ -135,4 +135,6 @@
 <script type="module" src="/public/js/actuadores/sensors.js"></script>
 <!-- Controladores -->
 <script type="module" src="/public/js/actuadores/controllers.js"></script>
+<!-- Default values -->
+<script type="module" src="/public/js/actuadores/defaultValues.js"></script>
 </html>

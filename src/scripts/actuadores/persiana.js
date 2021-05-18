@@ -1,6 +1,10 @@
+const DBServer = require("../../servers/dbServer")
 
-const togglePersiana = ( { value } ) => {    
-    return  ( ( value ? 'Subidas' : 'Bajadas' ) + ' correctamente' )
+const togglePersiana = async ( { value } ) => {
+    const db = DBServer.getInstance()
+    const date = new Date( Date.now() ).toISOString()
+
+    return await db.insert('persiana', [ { state: value, date } ] )
 }
 
 //**************************************************************************

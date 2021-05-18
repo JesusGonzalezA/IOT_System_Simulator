@@ -9,9 +9,11 @@ const submitMedidas  = require("../scripts/sensores/form")
 
 //**************************************************************************
 
-class HttpServer {
+class HttpServer  extends http.Server {
 
     constructor( port = 8080 ) {
+        super()
+        
         this.port = port
         this.server = this.createServer()
     }
@@ -53,10 +55,11 @@ class HttpServer {
                 break;
             case '/action/submit-medidas':
                 showPage = false 
-                action( req, res, submitMedidas)
+                action( req, res, submitMedidas )
                 break;
             default: 
                 name = url.replace('/','')
+                                
                 break;
         }
         

@@ -17,6 +17,7 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous" 
     />
+    <link rel="stylesheet" href="public/css/base.css" />
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
@@ -68,21 +69,30 @@
         <hr/>
 
         <!-- Botones -->
-        <p>
-            <a 
-                class="btn btn-outline-primary" role="button" 
-                href="#tableSensores" data-bs-toggle="collapse"
-            >
-              Tabla sensores
-            </a>
+        <div class="container">
+            <div class="d-flex justify-content-around">
+                <a 
+                    class="btn m-1 btn-outline-primary" role="button" 
+                    href="#tableSensores" data-bs-toggle="collapse"
+                >
+                    <i class="fas fa-vial"></i> Sensores
+                </a>
 
-            <a 
-                class="btn btn-outline-primary" role="button" 
-                href="#tableActuadores" data-bs-toggle="collapse"
-            >
-              Tabla actuadores
-            </a>
-        </p>
+                <a 
+                    class="btn m-1 btn-outline-primary" role="button" 
+                    href="#tableAC" data-bs-toggle="collapse"
+                >
+                    <i class="fas fa-fan"></i> Aire acondicionado
+                </a>
+
+                <a 
+                    class="btn m-1 btn-outline-primary" role="button" 
+                    href="#tablePersiana" data-bs-toggle="collapse"
+                >
+                    <i class="fas fa-warehouse"></i> Persiana
+                </a>
+            </div>
+        </div>
 
         <!-- Sensores -->
         <div class="collapse" id="tableSensores">
@@ -107,20 +117,37 @@
         </div>
 
         <!-- Actuadores -->
-        <div class="collapse" id="tableActuadores">
+        <div class="collapse" id="tableAC">
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Fecha</th>
-                    <th scope="col">Actuador</th>
                     <th scope="col">Valores</th>
                 </tr>
                 </thead>
-                <tbody id="tbodyActuadores">
-                    <template id="actuadorEntry">
+                <tbody id="tbodyAC">
+                    <template id="acEntry">
                         <tr>
                             <td>Fecha</td>
-                            <td>Actuador</td>
+                            <td>Valor</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="collapse" id="tablePersiana">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Valores</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyPersiana">
+                    <template id="persianaEntry">
+                        <tr>
+                            <td>Fecha</td>
                             <td>Valor</td>
                         </tr>
                     </template>

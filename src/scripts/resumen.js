@@ -6,7 +6,7 @@ const getResumen =  async () => {
     const sensores = await getSensores()
     const ac       = await getAC()
     const persiana = await getPersiana()
-
+    
     return {
         sensores,
         ac,

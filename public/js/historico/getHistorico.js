@@ -1,18 +1,27 @@
 
 const tBodySensores    = document.getElementById('tbodySensores')
-const tBodyActuadores  = document.getElementById('tbodyActuadores')
+const tBodyAC          = document.getElementById('tbodyAC')
+const tBodyPersiana    = document.getElementById('tbodyPersiana')
 const templateSensor   = document.getElementById('sensorEntry').content
-const templateActuador = document.getElementById('actuadorEntry').content
+const templatePersiana = document.getElementById('persianaEntry').content
+const templateAC       = document.getElementById('acEntry').content
 
-const fillTableActuadores = ( values, title ) => {
+const fillTableActuador = ( values, template, tbody ) => {
     values.forEach( entry => {
-        const node = templateActuador.cloneNode( true )
+        const node = template.cloneNode( true )
         const columns = Array.from( node.children[0].children )
         columns[0].innerText = entry.date
-        columns[1].innerText = title
-        columns[2].innerText = ( entry.state )? 'On' : 'Off'
-        tBodyActuadores.appendChild( node )
+        columns[1].innerText = ( entry.state )? 'On' : 'Off'
+        tbody.appendChild( node )
     })
+}
+
+const fillTablePersiana = ( values ) => {
+    fillTableActuador( values, templatePersiana, tBodyPersiana )
+}
+
+const fillTableAC = ( values ) => {
+    fillTableActuador( values, templateAC, tBodyAC )
 }
 
 const fillTableSensores = ( values ) => {
@@ -40,9 +49,8 @@ if ( response.status !== 200) {
 } else {
     const { sensores, ac, persiana } = await response.json()
 
-    
-    fillTableActuadores( ac, "Aire acondicionado" )
-    fillTableActuadores( persiana, "Persiana")
+    fillTableAC( ac )
+    fillTablePersiana( persiana )
     fillTableSensores( sensores )
 }
 

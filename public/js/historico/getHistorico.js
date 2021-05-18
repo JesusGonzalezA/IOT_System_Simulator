@@ -6,24 +6,24 @@ const templateSensor   = document.getElementById('sensorEntry').content
 const templatePersiana = document.getElementById('persianaEntry').content
 const templateAC       = document.getElementById('acEntry').content
 
-const fillTableActuador = ( values, template, tbody ) => {
+const fillTableActuador = ( values, template, tbody, active, unactive ) => {
     values.forEach( entry => {
         const node = template.cloneNode( true )
         const columns = Array.from( node.children[0].children )
 
         const date = new Date( entry.date )
         columns[0].innerText = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
-        columns[1].innerText = ( entry.state )? 'On' : 'Off'
+        columns[1].innerText = ( entry.state )? active : unactive
         tbody.appendChild( node )
     })
 }
 
 const fillTablePersiana = ( values ) => {
-    fillTableActuador( values, templatePersiana, tBodyPersiana )
+    fillTableActuador( values, templatePersiana, tBodyPersiana, 'Subidas', 'Bajadas' )
 }
 
 const fillTableAC = ( values ) => {
-    fillTableActuador( values, templateAC, tBodyAC )
+    fillTableActuador( values, templateAC, tBodyAC, 'Encendido', 'Apagado' )
 }
 
 const fillTableSensores = ( values ) => {

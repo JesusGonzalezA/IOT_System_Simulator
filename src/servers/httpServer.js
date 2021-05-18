@@ -38,8 +38,10 @@ class HttpServer  extends http.Server {
         
         switch( url ) {
             case '/':
-            case '/resumen':
                 name = `${pagesDir}/index.html`
+                break;
+            case '/resumen':
+                name = `${pagesDir}/resumen.html`
                 break;
             case '/actuadores':
                 name = `${pagesDir}/actuadores.html`

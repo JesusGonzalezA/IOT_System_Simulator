@@ -37,12 +37,27 @@ class DBServer {
     }
 
     async insert ( collectionName, values ) {
-        return await this.getDB().collection(collectionName).insertMany(values)    
+        return await this.getDB()
+            .collection( collectionName )
+            .insertMany( values )    
+    }
+
+    async get ( collectionName ) {
+        return await this.getDB()
+            .collection( collectionName )
+            .find()
+            .sort( { $natural: -1 } )
+            .toArray()
+    } 
+
+    async getLastOne ( collectionName ) {
+        return await this.getDB()
+            .collection( collectionName )
+            .find()
+            .sort( { $natural: -1 } )
     }
 
     start () {
-        
-
         MongoClient.connect(this.url, { 
             useNewUrlParser: true,
             useUnifiedTopology: true 
@@ -54,8 +69,6 @@ class DBServer {
         .catch( ( err ) => {
             console.log("MongoClient failed", err )
         })
-    
-        
     }
 }
 

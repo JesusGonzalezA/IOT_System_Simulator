@@ -23,6 +23,8 @@
         crossorigin="anonymous"
         defer
     ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
+
     <title>IOT Simulation System</title>
 </head>
 <body>
@@ -64,6 +66,68 @@
     <main class="container">
         <h1>Histórico</h1>
         <hr/>
+
+        <!-- Botones -->
+        <p>
+            <a 
+                class="btn btn-outline-primary" role="button" 
+                href="#tableSensores" data-bs-toggle="collapse"
+            >
+              Tabla sensores
+            </a>
+
+            <a 
+                class="btn btn-outline-primary" role="button" 
+                href="#tableActuadores" data-bs-toggle="collapse"
+            >
+              Tabla actuadores
+            </a>
+        </p>
+
+        <!-- Sensores -->
+        <div class="collapse" id="tableSensores">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Sensores</th>
+                    <th scope="col">Valores</th>
+                </tr>
+                </thead>
+                <tbody id="tbodySensores">
+                    <template id="sensorEntry">
+                        <tr>
+                            <td>Fecha</td>
+                            <td>Sensor</td>
+                            <td>Valor</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Actuadores -->
+        <div class="collapse" id="tableActuadores">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Actuador</th>
+                    <th scope="col">Valores</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyActuadores">
+                    <template id="actuadorEntry">
+                        <tr>
+                            <td>Fecha</td>
+                            <td>Actuador</td>
+                            <td>Valor</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
     </main>
 
     <footer>
@@ -79,4 +143,6 @@
         </p>
     </footer>
 </body>
+<!-- Get historico -->
+<script type="module" src="/public/js/historico/getHistorico.js"></script>
 </html>

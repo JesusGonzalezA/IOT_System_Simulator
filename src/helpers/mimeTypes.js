@@ -6,7 +6,9 @@ const mimeTypes = {
     png:  'image/png',
     css:  'text/css',
     ico:  'image/x-icon',
-    js :  'text/javascript'
+    js :  'text/javascript',
+    json: 'application/json',
+    text: 'text/plain'
 }
 
 const getMime = ( extension ) => {

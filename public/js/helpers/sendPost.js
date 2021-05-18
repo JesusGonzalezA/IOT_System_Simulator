@@ -1,8 +1,7 @@
-
-const baseURL      = window.location.origin
+import { baseURL } from "./baseUrl.js"
 
 export const sendPost = ( uri, body ) => {
-    const url     = `${baseURL}/${uri}`
+    const url     = `${ baseURL }/${ uri }`
     const headers = new Headers()
     headers.append("Content-Type", "application/json")
 

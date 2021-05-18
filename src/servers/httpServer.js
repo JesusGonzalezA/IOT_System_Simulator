@@ -1,11 +1,21 @@
 const http   = require("http")
 const fs     = require("fs")
 
-const togglePersiana = require("../scripts/actuadores/persiana")
-const toggleAC       = require("../scripts/actuadores/ac")
 const getMime        = require("../helpers/mimeTypes")
-const action         = require("../helpers/action")
 const submitMedidas  = require("../scripts/sensores/form")
+const getHistorico   = require("../scripts/historico").getHistorico
+const { 
+    actionPOST, 
+    actionGET 
+} = require("../helpers/actions")
+const {
+    toggleAC,
+    getAc
+} = require("../scripts/actuadores/ac")
+const {
+    togglePersiana,
+    getPersiana
+} = require("../scripts/actuadores/persiana")
 
 //**************************************************************************
 
@@ -47,16 +57,19 @@ class HttpServer  extends http.Server {
                 break;
             case '/action/persiana':
                 showPage = false
-                action( req, res, togglePersiana )
+                actionPOST( req, res, togglePersiana )
                 break;
             case '/action/ac':
                 showPage = false
-                action( req, res, toggleAC )
+                actionPOST( req, res, toggleAC )
                 break;
             case '/action/submit-medidas':
                 showPage = false 
-                action( req, res, submitMedidas )
+                actionPOST( req, res, submitMedidas )
                 break;
+            case '/action/get-historico':
+                showPage = false 
+                actionGET( res, getHistorico )
             default: 
                 name = url.replace('/','')
                                 

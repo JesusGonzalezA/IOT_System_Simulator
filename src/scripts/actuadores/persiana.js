@@ -7,6 +7,15 @@ const togglePersiana = async ( { value } ) => {
     return await db.insert('persiana', [ { state: value, date } ] )
 }
 
+const getPersiana = async () => {
+    const db = DBServer.getInstance()
+
+    return await db.getLastOne('persiana')
+}
+
 //**************************************************************************
 
-module.exports = togglePersiana
+module.exports = {
+    togglePersiana,
+    getPersiana
+}

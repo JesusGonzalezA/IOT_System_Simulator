@@ -51,10 +51,14 @@ class DBServer {
     } 
 
     async getLastOne ( collectionName ) {
-        return await this.getDB()
+        const res =  await this.getDB()
             .collection( collectionName )
             .find()
             .sort( { $natural: -1 } )
+            .limit( 1 )
+            .toArray()
+        
+        return res[0]
     }
 
     start () {

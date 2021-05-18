@@ -1,11 +1,14 @@
 const DBServer = require("../servers/dbServer")
+const { getAC } = require("./actuadores/ac")
+const { getPersiana } = require("./actuadores/persiana")
+const { getSensores } = require("./sensores/sensores")
 
 const getResumen =  async () => {
     
     const db = DBServer.getInstance()
-    const sensores = await db.get('sensores')
-    const ac       = await db.get('ac')
-    const persiana = await db.get('persiana')
+    const sensores = await getSensores()
+    const ac       = await getAC()
+    const persiana = await getPersiana()
     return {
         sensores,
         ac,

@@ -13,18 +13,28 @@ export const sendPost = ( uri, body ) => {
     }
 
     fetch( url, requestOptions )
-        .then  ( response => response.text() )
-        .then  ( result   => {
-            Swal.fire({
-                title: 'Éxito',
-                text: result,
-                icon: 'success'
-            })
-        })
-        .catch ( error    => {
+        .then  ( response => {
+            if ( response.status === 200 ) {
+                response.text()
+                    .then( ( text ) => {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text,
+                            icon: 'success'
+                        })
+                    })
+            }
+            
             Swal.fire({
                 title: 'Error',
-                text: error,
+                text: 'Hubo un error',
+                icon: 'error'
+            })
+        })
+        .catch ( () => {
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudo conectar con el servidor',
                 icon: 'error'
             })
         })

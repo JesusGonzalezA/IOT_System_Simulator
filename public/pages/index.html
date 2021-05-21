@@ -25,14 +25,20 @@
 </head>
 <body class="text-center">
     <main class="form-signin">
-        <form class="border p-5">
+        <form class="border p-5" id="form">
             <img class="mb-4" src="public/assets/icon.png" width="150" height="150">
             <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="name" placeholder="Tu nombre">
                 <label for="name">Tu nombre</label>
             </div>
-            <button class="w-100 btn btn-outline-primary" type="submit">Entrar</button>
+            <button 
+                class="w-100 btn btn-outline-primary" 
+                type="submit" 
+                id="submit-button"
+            >
+                Entrar
+            </button>
 
         </form>
 
@@ -49,4 +55,6 @@
     </main>
 
 </body>
+<!-- Get historico -->
+<script type="module" src="/public/js/login/login.js"></script>
 </html>

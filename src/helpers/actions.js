@@ -1,3 +1,4 @@
+const pages = require("../data/pages")
 const getMime = require("./mimeTypes")
 
 const actionPOST =  ( req, res, callback ) => {
@@ -32,12 +33,22 @@ const actionGET =  ( res, callback ) => {
             res.writeHead( 500, {
                 "Content-Type": getMime('text')
             })
-            res.write('La acción se realizó correctamente')
+            res.write('Hubo un error')
             res.end()
         })
 }
 
+const login = ( req, res ) => {
+    req.on('data', data => req.body = JSON.parse( data ) )
+    req.on('end', () => { 
+        res.writeHead( 301, {
+            'Location': '/resumen'
+        })
+        res.end() 
+    })
+        
+}
 
 //**************************************************************************
 
-module.exports = { actionPOST, actionGET }
+module.exports = { actionPOST, actionGET, login }

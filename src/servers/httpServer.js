@@ -9,7 +9,8 @@ const toggleAC       = require("../scripts/actuadores/ac").toggleAC
 const getResumen     = require("../scripts/resumen.js").getResumen
 const { 
     actionPOST, 
-    actionGET 
+    actionGET,
+    login
 } = require("../helpers/actions")
 const pages = require("../data/pages")
 const actions = require("../data/actions")
@@ -41,7 +42,7 @@ class HttpServer  extends http.Server {
         switch( url ) {
             case '/':
                 showPage = true
-                name = `${pagesDir}/index.html`
+                name = `${ pagesDir }/index.html`
                 break;
             case pages.RESUMEN:
             case pages.ACTUADORES:
@@ -59,6 +60,9 @@ class HttpServer  extends http.Server {
             case actions.SUBMIT_MEDIDAS:
                 actionPOST( req, res, submitMedidas )
                 break;
+            case actions.LOGIN: 
+                login( req, res )
+                break;
             case actions.GET_HISTORICO:
                 actionGET( res, getHistorico )
                 break;
@@ -67,8 +71,7 @@ class HttpServer  extends http.Server {
                 break;
             default: 
                 showPage = true
-                name = url.replace('/','')
-                                
+                name = url.replace('/','')          
                 break;
         }
         
@@ -100,7 +103,7 @@ class HttpServer  extends http.Server {
                 res.write( content.data )
             } else {
                 res.writeHead( 301, {
-                    'Location': '/404'
+                    'Location': pages.NOT_FOUND
                 })
             }
             res.end()

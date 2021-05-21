@@ -19,8 +19,7 @@ class SocketServer extends socketio.Server {
         this.listen( this.httpServer )
         console.log("Socketio is ready");
 
-        this.sockets.on( 'connection' , ( socket ) => {
-            
+        this.sockets.on( 'connection' , ( socket ) => {            
             
             socket.on( 'disconnect' , () => {
 

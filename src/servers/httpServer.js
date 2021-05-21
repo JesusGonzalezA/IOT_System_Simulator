@@ -40,6 +40,7 @@ class HttpServer  extends http.Server {
         let showPage     = false
 
         switch( url ) {
+            case '/':
             case pages.LOGIN:
                 showPage = true
                 name = `${ pagesDir }/index.html`

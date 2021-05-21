@@ -1,4 +1,5 @@
 import { login } from '../helpers/login.js'
+console.log(io);
 
 const input        = document.getElementById('name')
 const form         = document.getElementById('form')

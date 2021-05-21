@@ -8,7 +8,8 @@ const mimeTypes = {
     ico:  'image/x-icon',
     js :  'text/javascript',
     json: 'application/json',
-    text: 'text/plain'
+    text: 'text/plain',
+    map:  'application/json'
 }
 
 const getMime = ( extension ) => {

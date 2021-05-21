@@ -84,7 +84,7 @@ class HttpServer  extends http.Server {
     sendFile( res, name ) {
          
         fs.readFile( name, ( err, data ) => {
-            const extension = name.split('.')[1]
+            const extension = name.split('.').pop()
             const mimeType  = getMime( extension )
             
             const content = {

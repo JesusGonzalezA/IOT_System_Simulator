@@ -7,8 +7,8 @@ const SocketServer = require("./servers/socketServer.js")
 // Initialize variables
 const consoleHelper = new ConsoleHelper()
 const httpServer = new HttpServer()
-const socketServer = new SocketServer( httpServer )
 const dbServer   = new DBServer()
+// const socketServer = new SocketServer( httpServer )
 
 // Hello
 consoleHelper.printGreetings()
@@ -16,4 +16,4 @@ consoleHelper.printGreetings()
 // Initialize servers
 httpServer.start()
 dbServer.start()
-socketServer.start()
+// socketServer.start()

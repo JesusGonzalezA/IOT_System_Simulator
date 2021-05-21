@@ -15,9 +15,11 @@ form.onsubmit = ( event ) => {
         })
     }
 
-    const body = JSON.stringify({
-        name: input.value
-    })
-
-    login( body )
+    else {
+        const body = JSON.stringify({
+            name: input.value
+        })
+    
+        login( body )
+    }
 }

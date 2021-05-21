@@ -12,22 +12,17 @@ export const login = ( body ) => {
     }
 
     fetch( url, requestOptions )
-        .then  ( response => {
-            // if ( response.status !== 500 ) {
-            //     return;
-            // }
-            
-            // Swal.fire({
-            //     title: 'Error',
-            //     text: 'Hubo un error',
-            //     icon: 'error'
-            // })
+        .then  ( ( response ) => {
+
+            if ( response.status === 200 )
+                window.location.replace("/resumen")
+                
         })
         .catch ( () => {
-            // Swal.fire({
-            //     title: 'Error',
-            //     text: 'No se pudo conectar con el servidor',
-            //     icon: 'error'
-            // })
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudo conectar con el servidor',
+                icon: 'error'
+            })
         })
 }

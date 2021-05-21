@@ -38,17 +38,6 @@ const actionGET =  ( res, callback ) => {
         })
 }
 
-const login = ( req, res ) => {
-    req.on('data', data => req.body = JSON.parse( data ) )
-    req.on('end', () => { 
-        res.writeHead( 301, {
-            'Location': '/resumen'
-        })
-        res.end() 
-    })
-        
-}
-
 //**************************************************************************
 
-module.exports = { actionPOST, actionGET, login }
+module.exports = { actionPOST, actionGET }

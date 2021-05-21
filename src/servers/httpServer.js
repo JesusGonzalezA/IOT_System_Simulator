@@ -9,9 +9,9 @@ const toggleAC       = require("../scripts/actuadores/ac").toggleAC
 const getResumen     = require("../scripts/resumen.js").getResumen
 const { 
     actionPOST, 
-    actionGET,
-    login
+    actionGET
 } = require("../helpers/actions")
+const login = require("../scripts/login.js")
 const pages = require("../data/pages")
 const actions = require("../data/actions")
 
@@ -35,12 +35,12 @@ class HttpServer  extends http.Server {
 
     route ( req, res, url ) {
         const publicDir  = 'public'
-        const pagesDir   = `${publicDir}/pages`   
+        const pagesDir   = `${ publicDir }/pages`   
         let name         = ''
         let showPage     = false
-        
+
         switch( url ) {
-            case '/':
+            case pages.LOGIN:
                 showPage = true
                 name = `${ pagesDir }/index.html`
                 break;

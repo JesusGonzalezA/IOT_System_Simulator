@@ -16,6 +16,14 @@ class ConsoleHelper {
         )
     
     }
+
+    printDivider () {
+
+        console.log(
+            '----------------------------------------------\n'
+        )
+        
+    }
     
 }
 

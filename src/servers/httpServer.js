@@ -11,6 +11,8 @@ const {
     actionPOST, 
     actionGET 
 } = require("../helpers/actions")
+const pages = require("../data/pages")
+const actions = require("../data/actions")
 
 //**************************************************************************
 
@@ -34,45 +36,37 @@ class HttpServer  extends http.Server {
         const publicDir  = 'public'
         const pagesDir   = `${publicDir}/pages`   
         let name         = ''
-        let showPage     = true
+        let showPage     = false
         
         switch( url ) {
             case '/':
+                showPage = true
                 name = `${pagesDir}/index.html`
                 break;
-            case '/resumen':
-                name = `${pagesDir}/resumen.html`
+            case pages.RESUMEN:
+            case pages.ACTUADORES:
+            case pages.HISTORICO:
+            case pages.NOT_FOUND:
+                showPage = true
+                name = `${ pagesDir }${ url }.html`
                 break;
-            case '/actuadores':
-                name = `${pagesDir}/actuadores.html`
-                break;
-            case '/historico':
-                name = `${pagesDir}/historico.html`
-                break;
-            case '/404':
-                name = `${pagesDir}/404.html`
-                break;
-            case '/action/persiana':
-                showPage = false
+            case actions.TOGGLE_PERSIANA:
                 actionPOST( req, res, togglePersiana )
                 break;
-            case '/action/ac':
-                showPage = false
+            case actions.TOGGLE_AC:
                 actionPOST( req, res, toggleAC )
                 break;
-            case '/action/submit-medidas':
-                showPage = false 
+            case actions.SUBMIT_MEDIDAS:
                 actionPOST( req, res, submitMedidas )
                 break;
-            case '/action/get-historico':
-                showPage = false 
+            case actions.GET_HISTORICO:
                 actionGET( res, getHistorico )
                 break;
-            case '/action/get-resumen':
-                showPage = false
+            case actions.GET_RESUMEN:
                 actionGET( res, getResumen )
                 break;
             default: 
+                showPage = true
                 name = url.replace('/','')
                                 
                 break;

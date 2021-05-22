@@ -28,4 +28,12 @@ socket.on('connect', () => {
         })
 
     })
-});
+})
+
+socket.on('disconnect', () => {
+    Swal.fire({
+        title: 'Estás offline',
+        text: 'Revisa tu conexión a internet',
+        icon: 'info'
+    })
+})

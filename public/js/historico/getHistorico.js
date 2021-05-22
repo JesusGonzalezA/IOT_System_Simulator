@@ -57,5 +57,7 @@ if ( response.status !== 200) {
     fillTablePersiana( persiana )
     fillTableSensores( sensores )
 }
+//--------------------------------------------------------------------------
+
 
 

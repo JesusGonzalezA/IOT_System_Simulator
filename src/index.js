@@ -8,7 +8,7 @@ const SocketServer = require("./servers/socketServer.js")
 const consoleHelper = new ConsoleHelper()
 const httpServer = new HttpServer()
 const dbServer   = new DBServer()
-const socketServer = new SocketServer( httpServer )
+const socketServer = new SocketServer( httpServer.server )
 
 // Hello
 consoleHelper.printGreetings()

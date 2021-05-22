@@ -47,5 +47,22 @@ if ( response.status === 200) {
         icon: 'error'
     })
 }
+//--------------------------------------------------------------------------
+import { getSession } from '../helpers/getSession.js'
+import { baseURL } from '../helpers/baseUrl.js'
+
+const socket = io.connect( baseURL )
+socket.on('connect', () => {
+
+    socket.emit('start-session', { sessionId: getSession() })
+
+    socket.on('set-session-acknowledgment', () => {
+
+        socket.on('avalaible-update-ac', ( data ) => {
+            console.log(data)
+        })
+
+    })
+});
 
 

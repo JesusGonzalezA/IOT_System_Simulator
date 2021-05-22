@@ -1,13 +1,13 @@
 import { login } from '../helpers/login.js'
-console.log(io);
 
 const input        = document.getElementById('name')
-const form         = document.getElementById('form')
+const button       = document.getElementById('submit-button')
 
-form.onsubmit = ( event ) => {
+button.onclick = ( event ) => {
+    
+    event.preventDefault()
     
     if ( input.value === "" ) {
-        event.preventDefault()
         
         Swal.fire({
             title: 'Error',

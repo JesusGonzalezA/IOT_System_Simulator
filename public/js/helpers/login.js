@@ -13,9 +13,20 @@ export const login = ( body ) => {
 
     fetch( url, requestOptions )
         .then  ( ( response ) => {
+            if ( response.status === 200 ){
+                
+                const socket = io.connect( baseURL )
+                socket.on('connect', () => {
 
-            if ( response.status === 200 )
-                window.location.replace("/resumen")
+                    socket.emit('start-session', { sessionId: null })
+
+                    socket.on('set-session-acknowledgment', (data) => {
+                        sessionStorage.setItem('sessionId', data.sessionId)
+                        window.location.replace("/resumen")
+                    })
+                });
+
+            }
                 
         })
         .catch ( () => {

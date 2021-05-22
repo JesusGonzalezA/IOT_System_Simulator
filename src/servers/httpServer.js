@@ -17,6 +17,8 @@ const actions = require("../data/actions")
 
 //**************************************************************************
 
+var instanceHttp
+
 class HttpServer  extends http.Server {
 
     constructor( port = 8080 ) {
@@ -24,6 +26,12 @@ class HttpServer  extends http.Server {
         
         this.port = port
         this.server = this.createServer()
+        instanceHttp = this
+    }
+
+    static getInstance () {
+        if ( !instanceHttp ) return new HttpServer() 
+        return instanceHttp
     }
 
     createServer () {
@@ -82,7 +90,7 @@ class HttpServer  extends http.Server {
     }
 
     sendFile( res, name ) {
-         
+
         fs.readFile( name, ( err, data ) => {
             const extension = name.split('.').pop()
             const mimeType  = getMime( extension )

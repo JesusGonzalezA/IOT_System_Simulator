@@ -6,7 +6,8 @@ const socketEvents = {
     DISCONNECT: 'disconnect',
     AVALAIBLE_UPDATE_AC: 'avalaible-update-ac',
     AVALAIBLE_UPDATE_PERSIANA: 'avalaible-update-persiana',
-    AVALAIBLE_UPDATE_SENSORES: 'avalaible-update-sensores'
+    AVALAIBLE_UPDATE_SENSORES: 'avalaible-update-sensores',
+    ALERT_MESSAGE: 'agent-alert'
 }
 
 //**************************************************************************

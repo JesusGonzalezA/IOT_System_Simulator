@@ -9,12 +9,15 @@ class Agent {
     }
 
     static getInstance () {
-        if ( !instanceHttp ) return new HttpServer() 
-        return instanceHttp
+        if ( !instanceAgent ) return new Agent() 
+        return instanceAgent
     }
 
     checkValue ( value, alertValues ) {
-        return ( value < alertValues.max && value > alertValues.min )
+        return {
+            minOk:   ( value > alertValues.min ),
+            maxOk:   ( value < alertValues.max )
+        }
     }
     checkTemperature ( value ) {
         return this.checkValue( value, alertValues.temperature )

@@ -4,6 +4,7 @@
 import { getSession } from '../helpers/getSession.js'
 import { baseURL } from '../helpers/baseUrl.js'
 import { getName } from '../helpers/getName.js'
+import { setSensores } from './defaultValues.js'
 
 
 const formPersiana = document.getElementById('form-persiana')
@@ -26,6 +27,14 @@ socket.on('connect', () => {
 
         socket.on('avalaible-update-sensores', ( data ) => {
             setSensores( data.temperature, data.luminosity )
+        })
+        
+        socket.on('agent-alert', ( data ) => {
+            Swal.fire({
+                title: 'Alerta del agente',
+                text: data,
+                icon: 'info'
+            })
         })
 
     })

@@ -27,6 +27,14 @@ socket.on('connect', () => {
             setSensores( data )
         })
 
+        socket.on('agent-alert', ( data ) => {
+            Swal.fire({
+                title: 'Alerta del agente',
+                text: data,
+                icon: 'info'
+            })
+        })
+
     })
 })
 

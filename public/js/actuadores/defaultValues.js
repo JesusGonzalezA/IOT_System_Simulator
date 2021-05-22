@@ -12,7 +12,7 @@ name.innerText = 'Casa de ' + getName()
 
 //**************************************************************************
 // Update values
-const setSensores = ( temperature, luminosity ) => {
+export const setSensores = ( temperature, luminosity ) => {
     pTemperature.innerHTML = `${ temperature }º`
     pLuminosity.innerHTML = luminosity
 

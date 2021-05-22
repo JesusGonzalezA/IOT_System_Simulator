@@ -57,15 +57,13 @@ export const fillTableSensores = ( values ) => {
     })
 }
 
-export const updateTableSensores = ( values ) => {
-    values.forEach( entry => {
-        const node = templateSensor.cloneNode( true )
-        const columns = Array.from( node.children[0].children )
-        
-        const date = new Date( entry.date )
-        columns[0].innerText = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
-        columns[1].innerText = 'Luminosidad \n Temperatura'
-        columns[2].innerText = `${ entry.luminosity } \n ${ entry.temperature }º`
-        tBodySensores.appendChild( node )   
-    })
+export const updateTableSensores = ( entry ) => {
+    const node = templateSensor.cloneNode( true )
+    const columns = Array.from( node.children[0].children )
+    
+    const date = new Date( entry.date )
+    columns[0].innerText = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
+    columns[1].innerText = 'Luminosidad \n Temperatura'
+    columns[2].innerText = `${ entry.luminosity } \n ${ entry.temperature }º`
+    tBodySensores.insertBefore( node, tBodySensores.childNodes[0] ) 
 }

@@ -12,16 +12,21 @@ name.innerText = 'Casa de ' + getName()
 
 //**************************************************************************
 // Update values
+const setSensores = ( temperature, luminosity ) => {
+    pTemperature.innerHTML = `${ temperature }º`
+    pLuminosity.innerHTML = luminosity
+
+    inputLuminosity.value = luminosity
+    inputTemperature.value = temperature
+}
 
 const response = await sendGet( 'action/get-resumen' )
 if ( response.status === 200) {
     const data = await response.json()
     if ( data.sensores !== undefined ) {
-        pTemperature.innerHTML = `${data.sensores.temperature}º`
-        pLuminosity.innerHTML = data.sensores.luminosity
+        setSensores( data.sensores.temperature, data.sensores.luminosity )
     } else {
-        pTemperature.innerHTML = `${inputTemperature.value}º`
-        pLuminosity.innerHTML = inputLuminosity.value
+        setSensores( inputTemperature.value, inputLuminosity.value )
     }
 
     if ( data.persiana !== undefined )
@@ -56,6 +61,10 @@ socket.on('connect', () => {
 
         socket.on('avalaible-update-persiana', ( data ) => {
             formPersiana.checked = data.state
+        })
+
+        socket.on('avalaible-update-sensores', ( data ) => {
+            setSensores( data.temperature, data.luminosity )
         })
 
     })

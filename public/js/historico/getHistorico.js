@@ -54,6 +54,10 @@ socket.on('connect', () => {
             updateTablePersiana( data )
         })
 
+        socket.on('avalaible-update-sensores', ( data ) => {
+            updateTableSensores( data )
+        })
+
     })
 });
 

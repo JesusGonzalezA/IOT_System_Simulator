@@ -20,6 +20,11 @@ const setAC = ( value ) => {
     aire.style.color = ( value )? 'red' : 'green'
 }
 
+const setSensores = ( { luminosity : lValue, temperature : tValue } ) => {
+    temperature.innerHTML = tValue
+    luminosity.innerHTML  = lValue
+}
+
 const response = await sendGet( 'action/get-resumen' )
 
 if ( response.status === 200) {
@@ -30,8 +35,7 @@ if ( response.status === 200) {
         temperature.style.backgroundColor = luminosity.style.backgroundColor = 'brown'
         temperature.style.color = luminosity.style.color = 'white'
     } else {
-        temperature.innerHTML = data.sensores.temperature
-        luminosity.innerHTML  = data.sensores.luminosity
+        setSensores( data.sensores )
     }
     
     if ( data.ac === undefined ) {
@@ -75,6 +79,10 @@ socket.on('connect', () => {
 
         socket.on('avalaible-update-persiana', ( data ) => {
             setPersiana( data.state )
+        })
+
+        socket.on('avalaible-update-sensores', ( data ) => {
+            setSensores( data )
         })
 
     })

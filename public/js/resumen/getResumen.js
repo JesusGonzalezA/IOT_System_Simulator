@@ -8,6 +8,16 @@ const aire        = document.getElementById('aire')
 
 import { sendGet } from '../helpers/sendGet.js'
 
+const setPersiana = ( value ) => {
+    persianas.innerHTML   = ( value )? 'Subidas' : 'Bajadas'
+    persianas.style.color = ( value )? 'red' : 'green'
+}
+
+const setAC = ( value ) => {
+    aire.innerHTML   = ( value )? 'Encendido' : 'Apagado'
+    aire.style.color = ( value )? 'red' : 'green'
+}
+
 const response = await sendGet( 'action/get-resumen' )
 
 if ( response.status === 200) {
@@ -27,8 +37,7 @@ if ( response.status === 200) {
         aire.style.backgroundColor = 'brown'
         aire.style.color = 'white'
     } else {
-        aire.innerHTML   = ( data.ac.state )? 'Encendido' : 'Apagado'
-        aire.style.color = ( data.ac.state )? 'red' : 'green'
+        setAC( data.ac.state )
     }
 
     if ( data.persiana === undefined ) {
@@ -36,8 +45,7 @@ if ( response.status === 200) {
         persianas.style.backgroundColor = 'brown'
         persianas.style.color = 'white'
     } else {
-        persianas.innerHTML   = ( data.persiana.state )? 'Subidas' : 'Bajadas'
-        persianas.style.color = ( data.persiana.state )? 'red' : 'green'
+        setPersiana( data.persiana.state )
     }
     
 } else {
@@ -58,8 +66,12 @@ socket.on('connect', () => {
 
     socket.on('set-session-acknowledgment', () => {
 
-        socket.on('avalaible-update-ac', ( data ) => {
-            console.log(data)
+        socket.on('avalaible-update-ac', ( value ) => {
+            setAC( value )
+        })
+
+        socket.on('avalaible-update-persiana', ( value ) => {
+            setPersiana( value )
         })
 
     })

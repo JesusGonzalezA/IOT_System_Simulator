@@ -21,12 +21,30 @@ const fillTableActuador = ( values, template, tbody, active, unactive ) => {
     })
 }
 
+const updateTableActuador = ( entry, template, tbody, active, unactive ) => {
+    const node = template.cloneNode( true )
+    const columns = Array.from( node.children[0].children )
+
+    const date = new Date( entry.date )
+    columns[0].innerText = date.toLocaleDateString() + ", " + date.toLocaleTimeString()
+    columns[1].innerText = ( entry.state )? active : unactive
+    tbody.insertBefore( node, tbody.childNodes[0] )
+}
+
 const fillTablePersiana = ( values ) => {
     fillTableActuador( values, templatePersiana, tBodyPersiana, 'Subidas', 'Bajadas' )
 }
 
 const fillTableAC = ( values ) => {
     fillTableActuador( values, templateAC, tBodyAC, 'Encendido', 'Apagado' )
+}
+
+const updateTablePersiana = ( entry ) => {
+    updateTableActuador( entry, templatePersiana, tBodyPersiana, 'Subidas', 'Bajadas' )
+}
+
+const updateTableAC = ( entry ) => {
+    updateTableActuador( entry, templateAC, tBodyAC, 'Encendido', 'Apagado' )
 }
 
 const fillTableSensores = ( values ) => {
@@ -63,5 +81,28 @@ if ( response.status !== 200) {
 }
 //--------------------------------------------------------------------------
 
+//**************************************************************************
+// Update via socket
+
+import { getSession } from '../helpers/getSession.js'
+import { baseURL } from '../helpers/baseUrl.js'
+
+const socket = io.connect( baseURL )
+socket.on('connect', () => {
+
+    socket.emit('start-session', { sessionId: getSession(), name: getName() })
+
+    socket.on('set-session-acknowledgment', () => {
+
+        socket.on('avalaible-update-ac', ( data ) => {
+            updateTableAC( data )
+        })
+
+        socket.on('avalaible-update-persiana', ( data ) => {
+            updateTablePersiana( data )
+        })
+
+    })
+});
 
 

@@ -8,7 +8,7 @@ const togglePersiana = async ( { value } ) => {
 
     SocketServer
         .getInstance()
-        .emit( socketEvents.AVALAIBLE_UPDATE_PERSIANA, value )
+        .emit( socketEvents.AVALAIBLE_UPDATE_PERSIANA, { state: value, date } )
 
     return await db.insert('persiana', [ { state: value, date } ] )
 }

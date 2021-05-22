@@ -50,13 +50,12 @@ socket.on('connect', () => {
 
     socket.on('set-session-acknowledgment', () => {
 
-        socket.on('avalaible-update-ac', ( value ) => {
-            console.log("AC", value)
-            formAC.checked = value
+        socket.on('avalaible-update-ac', ( data ) => {
+            formAC.checked = data.state
         })
 
-        socket.on('avalaible-update-persiana', ( value ) => {
-            formPersiana.checked = value
+        socket.on('avalaible-update-persiana', ( data ) => {
+            formPersiana.checked = data.state
         })
 
     })

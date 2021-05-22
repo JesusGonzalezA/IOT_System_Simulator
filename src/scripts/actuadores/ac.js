@@ -9,7 +9,7 @@ const toggleAC = async ( { value } ) => {
 
     SocketServer
         .getInstance()
-        .emit( socketEvents.AVALAIBLE_UPDATE_AC, value )
+        .emit( socketEvents.AVALAIBLE_UPDATE_AC, { state: value, date } )
 
     return await db.insert('ac', [ { state: value, date } ] )
 }

@@ -69,12 +69,12 @@ socket.on('connect', () => {
 
     socket.on('set-session-acknowledgment', () => {
 
-        socket.on('avalaible-update-ac', ( value ) => {
-            setAC( value )
+        socket.on('avalaible-update-ac', ( data ) => {
+            setAC( data.state )
         })
 
-        socket.on('avalaible-update-persiana', ( value ) => {
-            setPersiana( value )
+        socket.on('avalaible-update-persiana', ( data ) => {
+            setPersiana( data.state )
         })
 
     })

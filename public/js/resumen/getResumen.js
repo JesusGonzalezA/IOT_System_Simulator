@@ -1,26 +1,29 @@
+import { getName } from '../helpers/getName.js'
+import { sendGet } from '../helpers/sendGet.js'
+
+//**************************************************************************
+
 const temperature = document.getElementById('temperature')
 const luminosity  = document.getElementById('luminosity')
 const persianas   = document.getElementById('persianas')
 const aire        = document.getElementById('aire')
-const name             = document.getElementById('name')
+const name        = document.getElementById('name')
 
 name.innerText = 'Casa de ' + getName()
 
 //--------------------------------------------------------------------------
 
-import { sendGet } from '../helpers/sendGet.js'
-
-const setPersiana = ( value ) => {
+export const setPersiana = ( value ) => {
     persianas.innerHTML   = ( value )? 'Subidas' : 'Bajadas'
     persianas.style.color = ( value )? 'red' : 'green'
 }
 
-const setAC = ( value ) => {
+export const setAC = ( value ) => {
     aire.innerHTML   = ( value )? 'Encendido' : 'Apagado'
     aire.style.color = ( value )? 'red' : 'green'
 }
 
-const setSensores = ( { luminosity : lValue, temperature : tValue } ) => {
+export const setSensores = ( { luminosity : lValue, temperature : tValue } ) => {
     temperature.innerHTML = tValue
     luminosity.innerHTML  = lValue
 }
@@ -61,31 +64,6 @@ if ( response.status === 200) {
         icon: 'error'
     })
 }
-//--------------------------------------------------------------------------
-import { getSession } from '../helpers/getSession.js'
-import { baseURL } from '../helpers/baseUrl.js'
-import { getName } from '../helpers/getName.js'
 
-const socket = io.connect( baseURL )
-socket.on('connect', () => {
-
-    socket.emit('start-session', { sessionId: getSession(), name: getName() })
-
-    socket.on('set-session-acknowledgment', () => {
-
-        socket.on('avalaible-update-ac', ( data ) => {
-            setAC( data.state )
-        })
-
-        socket.on('avalaible-update-persiana', ( data ) => {
-            setPersiana( data.state )
-        })
-
-        socket.on('avalaible-update-sensores', ( data ) => {
-            setSensores( data )
-        })
-
-    })
-});
 
 

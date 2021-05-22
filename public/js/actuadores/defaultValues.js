@@ -1,5 +1,6 @@
 import { sendPost } from '../helpers/sendPost.js'
 import { sendGet } from '../helpers/sendGet.js'
+import { getName } from '../helpers/getName.js'
 
 const form         = document.getElementById('form')
 const pLuminosity  = document.getElementById('luminosidad')
@@ -8,9 +9,12 @@ const formPersiana = document.getElementById('form-persiana')
 const formAC       = document.getElementById('form-ac')
 const inputTemperature = document.getElementById('form-temperatura')
 const inputLuminosity  = document.getElementById('form-luminosidad')
+const name             = document.getElementById('name')
+name.innerText = 'Casa de ' + getName()
 
 //**************************************************************************
 // Update values
+
 
 const response = await sendGet( 'action/get-resumen' )
 if ( response.status === 200) {

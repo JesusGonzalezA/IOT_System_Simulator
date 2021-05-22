@@ -18,10 +18,14 @@ export const login = ( body ) => {
                 const socket = io.connect( baseURL )
                 socket.on('connect', () => {
 
-                    socket.emit('start-session', { sessionId: null })
+                    socket.emit('start-session', { 
+                        sessionId: null, 
+                        name: JSON.parse(body).name 
+                    })
 
-                    socket.on('set-session-acknowledgment', (data) => {
-                        sessionStorage.setItem('sessionId', data.sessionId)
+                    socket.on('set-session-acknowledgment', ( data ) => {
+                        sessionStorage.setItem('sessionId', data.sessionId )
+                        sessionStorage.setItem('sessionName', data.name )
                         window.location.replace("/resumen")
                     })
                 });

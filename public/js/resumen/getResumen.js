@@ -2,7 +2,9 @@ const temperature = document.getElementById('temperature')
 const luminosity  = document.getElementById('luminosity')
 const persianas   = document.getElementById('persianas')
 const aire        = document.getElementById('aire')
+const name             = document.getElementById('name')
 
+name.innerText = 'Casa de ' + getName()
 
 //--------------------------------------------------------------------------
 
@@ -58,11 +60,12 @@ if ( response.status === 200) {
 //--------------------------------------------------------------------------
 import { getSession } from '../helpers/getSession.js'
 import { baseURL } from '../helpers/baseUrl.js'
+import { getName } from '../helpers/getName.js'
 
 const socket = io.connect( baseURL )
 socket.on('connect', () => {
 
-    socket.emit('start-session', { sessionId: getSession() })
+    socket.emit('start-session', { sessionId: getSession(), name: getName() })
 
     socket.on('set-session-acknowledgment', () => {
 

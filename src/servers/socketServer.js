@@ -31,20 +31,20 @@ class SocketServer extends socketio.Server {
 
         this.sockets.on( socketEvents.CONNECTION , ( socket ) => {   
             
-            socket.on(socketEvents.START_SESSION, (data) => {
-
+            socket.on(socketEvents.START_SESSION, ( data ) => {
+                
                 const sessionId = ( !data.sessionId )
                     ? uuidv4() 
                     : data.sessionId
                 
                 socket.emit(socketEvents.SET_SESSION, {
-                    sessionId
+                    sessionId,
+                    name: data.name
                 })
 
             })
 
             socket.on( socketEvents.DISCONNECT , () => {
-                
             })
         })
     }

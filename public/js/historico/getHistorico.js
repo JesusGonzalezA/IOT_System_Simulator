@@ -5,6 +5,9 @@ const tBodyPersiana    = document.getElementById('tbodyPersiana')
 const templateSensor   = document.getElementById('sensorEntry').content
 const templatePersiana = document.getElementById('persianaEntry').content
 const templateAC       = document.getElementById('acEntry').content
+const name             = document.getElementById('name')
+
+name.innerText = 'Casa de ' + getName()
 
 const fillTableActuador = ( values, template, tbody, active, unactive ) => {
     values.forEach( entry => {
@@ -39,6 +42,7 @@ const fillTableSensores = ( values ) => {
     })
 }
 
+import { getName } from '../helpers/getName.js'
 //--------------------------------------------------------------------------
 import { sendGet } from '../helpers/sendGet.js'
 

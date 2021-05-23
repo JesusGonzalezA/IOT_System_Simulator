@@ -1,4 +1,3 @@
-const pages = require("../data/pages")
 const getMime = require("./mimeTypes")
 
 const actionPOST =  ( req, res, callback ) => {

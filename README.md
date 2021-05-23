@@ -46,11 +46,13 @@ npm run start
 ```
 
 ## Pages
-<img src="./doc/pages/login.png" width="150" />
-<img src="./doc/pages/summary.png" width="150" />
-<img src="./doc/pages/history.png" width="150" />
-<img src="./doc/pages/actuators.png" width="150" />
-<img src="./doc/pages/comm.png" width="150" />
+<div style="display:flex;" >
+    <img src="./doc/pages/login.png" width="150" />
+    <img src="./doc/pages/summary.png" width="150" />
+    <img src="./doc/pages/history.png" width="150" />
+    <img src="./doc/pages/actuators.png" width="150" />
+    <img src="./doc/pages/comm.png" width="150" />
+</div>
 
 ## Tools
 - Client

@@ -47,11 +47,23 @@ npm run start
 
 ## Pages
 <div style="display:flex;" >
-    <img src="./doc/pages/login.png" width="150" />
-    <img src="./doc/pages/summary.png" width="150" />
-    <img src="./doc/pages/history.png" width="150" />
-    <img src="./doc/pages/actuators.png" width="150" />
-    <img src="./doc/pages/comm.png" width="150" />
+    <img src="./doc/pages/login.png" width="250" />
+    <img 
+        style="margin-left:10px;" 
+        src="./doc/pages/summary.png" width="250" 
+    />
+    <img
+        style="margin-left:10px;" 
+        src="./doc/pages/history.png" width="250" 
+    />
+    <img
+        style="margin-left:10px;" 
+        src="./doc/pages/actuators.png" width="250" 
+    />
+    <img
+        style="margin-left:10px;" 
+        src="./doc/pages/comm.png" width="250" 
+    />
 </div>
 
 ## Tools
